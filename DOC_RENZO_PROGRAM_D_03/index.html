@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+    
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-sm">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <i class="bi bi-person-circle text-primary" style="font-size: 3rem;"></i>
+                            <h2 class="card-title mt-2">Iniciar Sesión PARA INGRESAR AL INSTITUTO</h2>
+                            <p class="text-muted">Ingresa a tu cuenta para continuar</p>
+                        </div>
+                        
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo electrónico</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                    <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                    <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" class="form-check-input" id="remember">
+                                <label class="form-check-label" for="remember">Recordar mi cuenta</label>
+                                <a href="#" class="float-end text-decoration-none">¿Olvidaste tu contraseña?</a>
+                            </div>
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                            </div>
+                            
+                            <div class="my-4">
+                                <hr>
+                                <div class="text-center">
+                                    <span class="px-2 text-muted">O continuar con</span>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-2 text-center">
+                                <div class="col">
+                                    <button type="button" class="btn btn-outline-primary w-100">
+                                        <i class="bi bi-facebook"></i> Facebook
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button type="button" class="btn btn-outline-danger w-100">
+                                        <i class="bi bi-google"></i> Google
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center mt-4">
+                                <p class="text-muted">¿No tienes una cuenta? <a href="#" class="text-decoration-none">Regístrate ahora</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript para validación de credenciales -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            
+            // Credenciales estáticas para validación
+            const validCredentials = {
+                email: 'usuario@ejemplo.com',
+                password: 'Password123'
+            };
+            
+            loginForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Validar credenciales
+                if (email === validCredentials.email && password === validCredentials.password) {
+                    // Credenciales correctas, redirigir al dashboard
+                    window.location.href = 'indexcopy.html';
+                } else {
+                    // Credenciales incorrectas, mostrar mensaje de error
+                    alert('Credenciales incorrectas. Por favor, intenta nuevamente.\n\nUsa: usuario@ejemplo.com / Password123');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
