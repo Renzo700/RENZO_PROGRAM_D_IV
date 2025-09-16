@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía JavaScript - Aplicaciones Distribuidas</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>JavaScript para Aplicaciones Distribuidas</h1>
+        <p class="subtitle">Guía completa de validaciones y manipulación del DOM</p>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Temario</h2>
+            <ul>
+                <li><a href="#intro" class="active">Introducción a JavaScript</a></li>
+                <li><a href="#sintaxis">Sintaxis Básica</a></li>
+                <li><a href="#dom">Manipulación del DOM</a></li>
+                <li><a href="#eventos">Manejo de Eventos</a></li>
+                <li><a href="#validaciones">Validaciones de Formularios</a></li>
+                <li><a href="#ajax">AJAX y APIs</a></li>
+                <li><a href="#ejemplos">Ejemplos Prácticos</a></li>
+            </ul>
+        </aside>
+        
+        <main class="content">
+            <section id="intro" class="section">
+                <h2><i>📘</i> Introducción a JavaScript</h2>
+                <p>JavaScript es un lenguaje de programación esencial para el desarrollo web moderno. En aplicaciones distribuidas, JavaScript se ejecuta en el cliente (navegador) y se comunica con servidores para crear experiencias dinámicas.</p>
+                
+                <div class="example">
+                    <h3>¿Por qué JavaScript?</h3>
+                    <ul>
+                        <li>Ejecución en el cliente: reduce la carga del servidor</li>
+                        <li>Interactividad: responde inmediatamente a las acciones del usuario</li>
+                        <li>Comunicación asíncrona: permite actualizaciones sin recargar la página</li>
+                        <li>Ecosistema rico: múltiples frameworks y librerías (React, Angular, Vue)</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="sintaxis" class="section">
+                <h2><i>🔤</i> Sintaxis Básica</h2>
+                <p>La sintaxis de JavaScript es similar a otros lenguajes de programación. Aquí los conceptos fundamentales:</p>
+                
+                <div class="code-block">
+                    // Variables y constantes<br>
+                    let variable = "valor";<br>
+                    const constante = "valor fijo";<br><br>
+                    
+                    // Funciones<br>
+                    function saludar(nombre) {<br>
+                    &nbsp;&nbsp;return `Hola ${nombre}`;<br>
+                    }<br><br>
+                    
+                    // Arrow functions (funciones flecha)<br>
+                    const sumar = (a, b) => a + b;<br><br>
+                    
+                    // Objetos<br>
+                    const persona = {<br>
+                    &nbsp;&nbsp;nombre: "Ana",<br>
+                    &nbsp;&nbsp;edad: 30,<br>
+                    &nbsp;&nbsp;profesion: "Desarrolladora"<br>
+                    };
+                </div>
+                
+                <div class="interactive-demo">
+                    <h3>Práctica de Sintaxis</h3>
+                    <div class="form-group">
+                        <label for="nombreInput">Ingresa tu nombre:</label>
+                        <input type="text" id="nombreInput" placeholder="Escribe tu nombre">
+                    </div>
+                    <button onclick="saludarUsuario()">Saludar</button>
+                    <div id="saludoOutput" style="margin-top: 1rem; font-weight: bold;"></div>
+                </div>
+            </section>
+            
+            <section id="dom" class="section">
+                <h2><i>🌳</i> Manipulación del DOM</h2>
+                <p>El DOM (Document Object Model) es la representación estructurada de un documento HTML. JavaScript puede manipular el DOM para cambiar contenido, estilos y estructura de la página.</p>
+                
+                <div class="code-block">
+                    // Seleccionar elementos<br>
+                    const elemento = document.getElementById('miId');<br>
+                    const elementos = document.querySelectorAll('.miClase');<br><br>
+                    
+                    // Crear elementos<br>
+                    const nuevoElemento = document.createElement('div');<br>
+                    nuevoElemento.textContent = 'Soy nuevo';<br><br>
+                    
+                    // Modificar elementos<br>
+                    elemento.textContent = 'Nuevo texto';<br>
+                    elemento.style.color = 'red';<br>
+                    elemento.classList.add('clase-nueva');<br><br>
+                    
+                    // Añadir al DOM<br>
+                    document.body.appendChild(nuevoElemento);
+                </div>
+                
+                <div class="interactive-demo">
+                    <h3>Manipulación Práctica del DOM</h3>
+                    <div class="form-group">
+                        <label for="elementoTexto">Texto del elemento:</label>
+                        <input type="text" id="elementoTexto" placeholder="Escribe algo aquí">
+                    </div>
+                    <div class="form-group">
+                        <label for="colorSelect">Color de texto:</label>
+                        <select id="colorSelect">
+                            <option value="black">Negro</option>
+                            <option value="red">Rojo</option>
+                            <option value="blue">Azul</option>
+                            <option value="green">Verde</option>
+                        </select>
+                    </div>
+                    <button onclick="manipularDOM()">Aplicar Cambios</button>
+                    
+                    <div class="dom-output">
+                        <p id="textoDemo">Este texto cambiará según lo que escribas.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="validaciones" class="section">
+                <h2><i>✅</i> Validaciones de Formularios</h2>
+                <p>Las validaciones en JavaScript permiten verificar los datos ingresados por los usuarios antes de enviarlos al servidor, mejorando la experiencia de usuario y reduciendo errores.</p>
+                
+                <div class="code-block">
+                    // Validación básica de formulario<br>
+                    function validarFormulario() {<br>
+                    &nbsp;&nbsp;const email = document.getElementById('email').value;<br>
+                    &nbsp;&nbsp;const password = document.getElementById('password').value;<br>
+                    &nbsp;&nbsp;const errorDiv = document.getElementById('error');<br><br>
+                    
+                    &nbsp;&nbsp;// Limpiar errores previos<br>
+                    &nbsp;&nbsp;errorDiv.textContent = '';<br><br>
+                    
+                    &nbsp;&nbsp;// Validar email<br>
+                    &nbsp;&nbsp;if (!email.includes('@')) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;errorDiv.textContent = 'Ingresa un email válido';<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+                    &nbsp;&nbsp;}<br><br>
+                    
+                    &nbsp;&nbsp;// Validar contraseña<br>
+                    &nbsp;&nbsp;if (password.length < 6) {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;errorDiv.textContent = 'La contraseña debe tener al menos 6 caracteres';<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+                    &nbsp;&nbsp;}<br><br>
+                    
+                    &nbsp;&nbsp;return true;<br>
+                    }
+                </div>
+                
+                <div class="interactive-demo">
+                    <h3>Formulario de Validación</h3>
+                    <form id="demoForm" onsubmit="return validarFormularioDemo()">
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" id="email" placeholder="tu@email.com">
+                            <div id="emailError" class="error">Por favor ingresa un email válido</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" id="password" placeholder="Mínimo 6 caracteres">
+                            <div id="passwordError" class="error">La contraseña debe tener al menos 6 caracteres</div>
+                        </div>
+                        
+                        <button type="submit">Enviar</button>
+                    </form>
+                    
+                    <div id="formSuccess" class="success-message">
+                        ¡Formulario validado correctamente!
+                    </div>
+                </div>
+            </section>
+            
+            <section id="ejemplos" class="section">
+                <h2><i>🚀</i> Ejemplos Prácticos</h2>
+                <p>A continuación, algunos ejemplos prácticos de cómo JavaScript puede mejorar las aplicaciones distribuidas:</p>
+                
+                <div class="interactive-demo">
+                    <h3>Lista Dinámica de Elementos</h3>
+                    <div class="form-group">
+                        <label for="nuevoElemento">Añadir nuevo elemento:</label>
+                        <input type="text" id="nuevoElemento" placeholder="Escribe algo">
+                    </div>
+                    <button onclick="agregarElemento()">Agregar</button>
+                    
+                    <div id="listaElementos" class="dom-output">
+                        <p>Los elementos agregados aparecerán aquí</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <footer>
+        <p>Guía de JavaScript para Aplicaciones Distribuidas - © 2023</p>
+    </footer>
+
+
+</body>
+</html>
