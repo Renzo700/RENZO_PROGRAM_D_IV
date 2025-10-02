@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía JavaScript - Contador de Cafés</title>
+    <link rel="stylesheet" href="stile.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>cafe el buen cafe</h1>
+        <p class="subtitle">le damos un buen dia con un cafecito</p>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h2>seleccione </h2>
+            <ul>
+                <li><a href="#intro" class="active">cafe negro</a></li>
+                <li><a href="#sintaxis">capuchino</a></li>
+                <li><a href="#dom">cafe normal</a></li>
+                
+            </ul>
+        </aside>
+        
+        <main class="content">
+            <section id="intro" class="section">
+                <h2><i>☕</i> cafecito</h2>
+                <p></p>
+                
+    
+  </style>
+</head>
+<body>
+
+  <h1>Cafetería El Buen Café</h1>
+  <p>Precio por café: <strong>$6</strong></p>
+
+  <div class="contador">
+    <p>Cafés comprados: <span id="cantidad">0</span></p>
+    <p>Total a pagar: $<span id="total">0</span></p>
+  </div>
+
+  <button onclick="agregarCafe()">Agregar Café</button>
+  <button onclick="reiniciar()">Reiniciar</button>
+
+  <script>
+    let cantidad = 0;
+    const precio = 6;
+
+    function agregarCafe() {
+      cantidad++;
+      actualizarTotal();
+    }
+
+    function reiniciar() {
+      cantidad = 0;
+      actualizarTotal();
+    }
+
+    function actualizarTotal() {
+      document.getElementById('cantidad').textContent = cantidad;
+      document.getElementById('total').textContent = cantidad * precio;
+    }
+  </script>
+
+  
+
+</body>
+
+  </style>
+</head>
+<body>
+
+  <h1>Cafetería El Buen Café</h1>
+  <p>Precio por café: <strong>$6</strong></p>
+
+  <div class="contador">
+    <p>Cafés comprados: <span id="cantidad">0</span></p>
+    <p>Total a pagar: $<span id="total">0</span></p>
+  </div>
+
+  <button onclick="agregarCafe()">Agregar Café</button>
+  <button onclick="reiniciar()">Reiniciar</button>
+
+  <script>
+    let cantidad = 0;
+    const precio = 6;
+
+    function agregarCafe() {
+      cantidad++;
+      actualizarTotal();
+    }
+
+    function reiniciar() {
+      cantidad = 0;
+      actualizarTotal();
+    }
+
+    function actualizarTotal() {
+      document.getElementById('cantidad').textContent = cantidad;
+      document.getElementById('total').textContent = cantidad * precio;
+    }
+  </script>
+
+</body>
+
