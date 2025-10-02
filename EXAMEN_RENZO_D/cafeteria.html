@@ -3,106 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía JavaScript - Contador de Cafés</title>
+    <title>Cafetería El Buen Café</title>
     <link rel="stylesheet" href="stile.css">
     <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>cafe el buen cafe</h1>
-        <p class="subtitle">le damos un buen dia con un cafecito</p>
+        <h1>☕ Cafetería El Buen Café</h1>
+        <p>Elija su café favorito</p>
     </header>
-    
-    <div class="container">
-        <aside class="sidebar">
-            <h2>seleccione </h2>
-            <ul>
-                <li><a href="#intro" class="active">cafe negro</a></li>
-                <li><a href="#sintaxis">capuchino</a></li>
-                <li><a href="#dom">cafe normal</a></li>
-                
-            </ul>
-        </aside>
-        
-        <main class="content">
-            <section id="intro" class="section">
-                <h2><i>☕</i> cafecito</h2>
-                <p></p>
-                
-    
-  </style>
-</head>
-<body>
 
-  <h1>Cafetería El Buen Café</h1>
-  <p>Precio por café: <strong>$6</strong></p>
+    <main class="cafes">
+        <div class="cafe">
+            <img src="data:image/jpeg;base64,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" alt="Café Negro">
+            <h2>Café Negro</h2>
+            <p>Precio: $7</p>
+            <button onclick="agregarCafe('negro')">Agregar</button>
+            <p>Comprados: <span id="cantNegro">0</span></p>
+        </div>
 
-  <div class="contador">
-    <p>Cafés comprados: <span id="cantidad">0</span></p>
-    <p>Total a pagar: $<span id="total">0</span></p>
-  </div>
+        <div class="cafe">
+            <img src="https://www.shutterstock.com/image-vector/coffee-cup-sleeve-mockup-front-600nw-1498752140.jpg" alt="Café Normal">
+            <h2>Café Normal</h2>
+            <p>Precio: $6</p>
+            <button onclick="agregarCafe('normal')">Agregar</button>
+            <p>Comprados: <span id="cantNormal">0</span></p>
+        </div>
 
-  <button onclick="agregarCafe()">Agregar Café</button>
-  <button onclick="reiniciar()">Reiniciar</button>
+        <div class="cafe">
+            <img src="https://png.pngtree.com/png-clipart/20231018/original/pngtree-cappuccino-illustration-espresso-based-coffee-drink-traditionally-prepared-with-steamed-milk-png-image_13343176.png" alt="Capuchino">
+            <h2>Capuchino</h2>
+            <p>Precio: $5</p>
+            <button onclick="agregarCafe('capuchino')">Agregar</button>
+            <p>Comprados: <span id="cantCapuchino">0</span></p>
+        </div>
+    </main>
 
-  <script>
-    let cantidad = 0;
-    const precio = 6;
-
-    function agregarCafe() {
-      cantidad++;
-      actualizarTotal();
-    }
-
-    function reiniciar() {
-      cantidad = 0;
-      actualizarTotal();
-    }
-
-    function actualizarTotal() {
-      document.getElementById('cantidad').textContent = cantidad;
-      document.getElementById('total').textContent = cantidad * precio;
-    }
-  </script>
-
-  
-
+    <section class="pedido">
+        <h2>📝 Su pedido</h2>
+        <p>Total a pagar: $<span id="total">0</span></p>
+        <label>Ingrese su nombre: <input type="text" id="nombre"></label>
+        <button onclick="registrarPedido()">Registrar Pedido</button>
+        <button onclick="reiniciarPedido()">Reiniciar Pedido</button>
+        <p id="mensaje"></p>
+    </section>
 </body>
-
-  </style>
-</head>
-<body>
-
-  <h1>Cafetería El Buen Café</h1>
-  <p>Precio por café: <strong>$6</strong></p>
-
-  <div class="contador">
-    <p>Cafés comprados: <span id="cantidad">0</span></p>
-    <p>Total a pagar: $<span id="total">0</span></p>
-  </div>
-
-  <button onclick="agregarCafe()">Agregar Café</button>
-  <button onclick="reiniciar()">Reiniciar</button>
-
-  <script>
-    let cantidad = 0;
-    const precio = 6;
-
-    function agregarCafe() {
-      cantidad++;
-      actualizarTotal();
-    }
-
-    function reiniciar() {
-      cantidad = 0;
-      actualizarTotal();
-    }
-
-    function actualizarTotal() {
-      document.getElementById('cantidad').textContent = cantidad;
-      document.getElementById('total').textContent = cantidad * precio;
-    }
-  </script>
-
-</body>
-
+</html>
