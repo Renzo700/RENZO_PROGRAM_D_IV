@@ -1,0 +1,186 @@
+
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema sis_notas
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema sis_notas
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `sis_notas` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `sis_notas` ;
+
+-- -----------------------------------------------------
+-- Table `sis_notas`.`alumnos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sis_notas`.`alumnos` (
+  `id_alumno` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(100) NULL DEFAULT NULL,
+  `apellido` VARCHAR(100) NULL DEFAULT NULL,
+  `dni` VARCHAR(15) NULL DEFAULT NULL,
+  `email` VARCHAR(100) NULL DEFAULT NULL,
+  `telefono` VARCHAR(15) NULL DEFAULT NULL,
+  `direccion` VARCHAR(255) NULL DEFAULT NULL,
+  `fecha_nacimiento` DATE NULL DEFAULT NULL,
+  PRIMARY KEY (`id_alumno`),
+  UNIQUE INDEX `dni` (`dni` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1001
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `sis_notas`.`docentes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sis_notas`.`docentes` (
+  `id_docente` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(100) NULL DEFAULT NULL,
+  `apellido` VARCHAR(100) NULL DEFAULT NULL,
+  `email` VARCHAR(100) NULL DEFAULT NULL,
+  `password` VARCHAR(255) NULL DEFAULT NULL,
+  `especialidad` VARCHAR(100) NULL DEFAULT NULL,
+  `fecha_registro` DATE NULL DEFAULT NULL,
+  PRIMARY KEY (`id_docente`),
+  UNIQUE INDEX `email` (`email` ASC) VISIBLE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 27
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `sis_notas`.`cursos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sis_notas`.`cursos` (
+  `id_curso` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(100) NULL DEFAULT NULL,
+  `descripcion` TEXT NULL DEFAULT NULL,
+  `creditos` INT NULL DEFAULT NULL,
+  `estado` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_curso`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 16
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `sis_notas`.`asignaciones`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sis_notas`.`asignaciones` (
+  `id_asignacion` INT NOT NULL AUTO_INCREMENT,
+  `id_docente` INT NULL DEFAULT NULL,
+  `id_curso` INT NULL DEFAULT NULL,
+  `periodo` VARCHAR(20) NULL DEFAULT NULL,
+  `seccion` VARCHAR(10) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_asignacion`),
+  INDEX `id_docente` (`id_docente` ASC) VISIBLE,
+  INDEX `id_curso` (`id_curso` ASC) VISIBLE,
+  CONSTRAINT `asignaciones_ibfk_1`
+    FOREIGN KEY (`id_docente`)
+    REFERENCES `sis_notas`.`docentes` (`id_docente`),
+  CONSTRAINT `asignaciones_ibfk_2`
+    FOREIGN KEY (`id_curso`)
+    REFERENCES `sis_notas`.`cursos` (`id_curso`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 84
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `sis_notas`.`horarios`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sis_notas`.`horarios` (
+  `id_horario` INT NOT NULL AUTO_INCREMENT,
+  `id_asignacion` INT NULL DEFAULT NULL,
+  `dia_semana` VARCHAR(20) NULL DEFAULT NULL,
+  `hora_inicio` TIME NULL DEFAULT NULL,
+  `hora_fin` TIME NULL DEFAULT NULL,
+  `aula` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_horario`),
+  INDEX `id_asignacion` (`id_asignacion` ASC) VISIBLE,
+  CONSTRAINT `horarios_ibfk_1`
+    FOREIGN KEY (`id_asignacion`)
+    REFERENCES `sis_notas`.`asignaciones` (`id_asignacion`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 167
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `sis_notas`.`inscripciones`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sis_notas`.`inscripciones` (
+  `id_inscripcion` INT NOT NULL AUTO_INCREMENT,
+  `id_alumno` INT NULL DEFAULT NULL,
+  `id_asignacion` INT NULL DEFAULT NULL,
+  `fecha_inscripcion` DATE NULL DEFAULT NULL,
+  `estado` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_inscripcion`),
+  INDEX `id_alumno` (`id_alumno` ASC) VISIBLE,
+  INDEX `id_asignacion` (`id_asignacion` ASC) VISIBLE,
+  CONSTRAINT `inscripciones_ibfk_1`
+    FOREIGN KEY (`id_alumno`)
+    REFERENCES `sis_notas`.`alumnos` (`id_alumno`),
+  CONSTRAINT `inscripciones_ibfk_2`
+    FOREIGN KEY (`id_asignacion`)
+    REFERENCES `sis_notas`.`asignaciones` (`id_asignacion`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 20690
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `sis_notas`.`tipos_nota`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sis_notas`.`tipos_nota` (
+  `id_tipo_nota` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(50) NULL DEFAULT NULL,
+  `descripcion` TEXT NULL DEFAULT NULL,
+  `peso_porcentual` DECIMAL(5,2) NULL DEFAULT NULL,
+  PRIMARY KEY (`id_tipo_nota`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `sis_notas`.`notas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sis_notas`.`notas` (
+  `id_nota` INT NOT NULL AUTO_INCREMENT,
+  `id_inscripcion` INT NULL DEFAULT NULL,
+  `id_tipo_nota` INT NULL DEFAULT NULL,
+  `valor` DECIMAL(5,2) NULL DEFAULT NULL,
+  `fecha_registro` DATE NULL DEFAULT NULL,
+  PRIMARY KEY (`id_nota`),
+  INDEX `id_inscripcion` (`id_inscripcion` ASC) VISIBLE,
+  INDEX `id_tipo_nota` (`id_tipo_nota` ASC) VISIBLE,
+  CONSTRAINT `notas_ibfk_1`
+    FOREIGN KEY (`id_inscripcion`)
+    REFERENCES `sis_notas`.`inscripciones` (`id_inscripcion`),
+  CONSTRAINT `notas_ibfk_2`
+    FOREIGN KEY (`id_tipo_nota`)
+    REFERENCES `sis_notas`.`tipos_nota` (`id_tipo_nota`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 82757
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
