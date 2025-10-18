@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Docentes</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #0069d9, #6610f2);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    .login-box {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+      width: 90%;
+      max-width: 380px;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 1.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #007bff;
+      box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.1s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    button:disabled {
+      background-color: #999;
+      cursor: not-allowed;
+    }
+
+    .msg {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 14px;
+      transition: color 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Iniciar Sesión</h2>
+    <input type="email" id="email" placeholder="Correo electrónico" required autocomplete="off">
+    <input type="password" id="password" placeholder="Contraseña" required autocomplete="off">
+    <button id="btnLogin" onclick="login()">Entrar</button>
+    <p id="msg" class="msg"></p>
+  </div>
+
+  <script>
+    async function login() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const msg = document.getElementById('msg');
+      const btn = document.getElementById('btnLogin');
+
+      if (!email || !password) {
+        msg.textContent = 'Por favor, complete todos los campos.';
+        msg.style.color = 'red';
+        return;
+      }
+
+      // Estado de carga
+      btn.disabled = true;
+      msg.textContent = 'Verificando credenciales...';
+      msg.style.color = '#007bff';
+
+      try {
+        const res = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (data.ok) {
+          msg.textContent = '✅ Acceso concedido, redirigiendo...';
+          msg.style.color = 'green';
+
+          // Guardar sesión simulada
+          localStorage.setItem('docenteId', data.docente.id_docente);
+          localStorage.setItem('docenteNombre', `${data.docente.nombre} ${data.docente.apellido}`);
+
+ 
+            window.location.href = 'dashboard.html';
+        
+
+        } else {
+          msg.textContent = data.mensaje || 'Credenciales incorrectas.';
+          msg.style.color = 'red';
+        }
+
+      } catch (err) {
+        console.error(err);
+        msg.textContent = '⚠️ Error de conexión con el servidor.';
+        msg.style.color = 'orange';
+      } finally {
+        btn.disabled = false; // Rehabilitar el botón
+      }
+    }
+  </script>
+</body>
+</html>
